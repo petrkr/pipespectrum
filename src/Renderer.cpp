@@ -2,6 +2,10 @@
 #include <iostream>
 #include <algorithm>
 
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb/stb_image.h"
+#include "icon_data.h"
+
 Renderer::Renderer(const WindowConfig& windowCfg, const VisualizationConfig& visCfg)
     : width(windowCfg.width), height(windowCfg.height),
       vsync(windowCfg.vsync), visConfig(visCfg) {
@@ -37,6 +41,23 @@ bool Renderer::initialize() {
     if (!window) {
         std::cerr << "Window creation failed: " << SDL_GetError() << std::endl;
         return false;
+    }
+
+    // Set window icon
+    int iconWidth, iconHeight, iconChannels;
+    unsigned char* iconData = stbi_load_from_memory(pipespectrum_48_png, pipespectrum_48_png_len, &iconWidth, &iconHeight, &iconChannels, 4);
+    if (iconData) {
+        SDL_Surface* iconSurface = SDL_CreateSurfaceFrom(
+            iconWidth, iconHeight,
+            SDL_PIXELFORMAT_RGBA32,
+            iconData,
+            iconWidth * 4
+        );
+        if (iconSurface) {
+            SDL_SetWindowIcon(window, iconSurface);
+            SDL_DestroySurface(iconSurface);
+        }
+        stbi_image_free(iconData);
     }
 
     glContext = SDL_GL_CreateContext(window);
