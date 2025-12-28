@@ -1,0 +1,51 @@
+window:
+  title: "PipeSpectrum - FFT Analyzer"
+  width: 700
+  height: 300
+  vsync: true
+
+spectrum:
+  # Number of frequency bands (bars)
+  bands: 96
+
+  # Frequency range
+  min_freq: 40.0
+  max_freq: 18000.0
+
+  # FFT parameters
+  fft_size: 2048  # Smaller = faster response (was 8192)
+  sample_rate: 48000
+
+  # Smoothing (0.0 = no smoothing, 1.0 = maximum smoothing)
+  smoothing: 0.8  # Lower = faster response (was 0.7)
+
+  # Dynamic range (dB scale)
+  min_db: -60.0   # Minimum dB level (lower = shows more quiet sounds)
+  max_db: -5.0     # Maximum dB level (usually 0)
+
+  # Noise gate threshold (0.0-1.0, values below this are cut to zero)
+  noise_threshold: 0.05  # Suppress noise floor
+
+  # Frequency weighting (compensate high frequencies being quieter)
+  freq_weighting: true  # Apply A-weighting style boost to high frequencies
+
+  # Peak hold settings
+  peak_hold_enabled: true
+  peak_fall_time: 3.0  # Time in seconds for peak to fall from top to bottom (0.5-5.0)
+
+visualization:
+  # Bar colors (RGB 0-255)
+  bar_color_low: [0, 255, 0]      # Green for low levels
+  bar_color_mid: [255, 255, 0]    # Yellow for mid levels
+  bar_color_high: [255, 0, 0]     # Red for high levels
+
+  peak_color: [255, 255, 255]     # White for peak indicators
+
+  # Bar appearance
+  bar_gap: 2                       # Gap between bars in pixels
+  bar_gradient: true               # Use gradient based on level
+
+audio:
+  # PipeWire settings
+  target_latency: 20              # milliseconds
+  buffer_size: 1024
