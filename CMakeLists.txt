@@ -75,7 +75,7 @@ target_compile_options(${PROJECT_NAME} PRIVATE
 
 # Install
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-install(FILES config.yaml DESTINATION share/${PROJECT_NAME})
+install(FILES config.sample.yaml DESTINATION share/${PROJECT_NAME})
 
 # Install desktop file and icons
 install(FILES pipespectrum.desktop DESTINATION share/applications)
