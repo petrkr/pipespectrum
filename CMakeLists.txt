@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(PipeSpectrum VERSION 1.0.0 LANGUAGES CXX)
+project(pipespectrum VERSION 1.0.0 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -13,7 +13,6 @@ pkg_check_modules(PIPEWIRE REQUIRED libpipewire-0.3)
 
 # SDL3
 pkg_check_modules(SDL3 REQUIRED sdl3)
-pkg_check_modules(SDL3_IMAGE sdl3-image)
 
 # OpenGL
 find_package(OpenGL REQUIRED)
@@ -52,7 +51,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${PIPEWIRE_INCLUDE_DIRS}
     ${SDL3_INCLUDE_DIRS}
-    ${SDL3_IMAGE_INCLUDE_DIRS}
     ${GLEW_INCLUDE_DIRS}
     ${FFTW3_INCLUDE_DIRS}
     ${YAMLCPP_INCLUDE_DIRS}
@@ -61,7 +59,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 target_link_libraries(${PROJECT_NAME} PRIVATE
     ${PIPEWIRE_LIBRARIES}
     ${SDL3_LIBRARIES}
-    ${SDL3_IMAGE_LIBRARIES}
     OpenGL::GL
     ${GLEW_LIBRARIES}
     ${FFTW3_LIBRARIES}
