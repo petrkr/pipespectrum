@@ -76,3 +76,11 @@ target_compile_options(${PROJECT_NAME} PRIVATE
 # Install
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 install(FILES config.yaml DESTINATION share/${PROJECT_NAME})
+
+# Install desktop file and icons
+install(FILES pipespectrum.desktop DESTINATION share/applications)
+install(FILES assets/pipespectrum.svg DESTINATION share/icons/hicolor/scalable/apps)
+install(FILES assets/pipespectrum-256.png DESTINATION share/icons/hicolor/256x256/apps RENAME pipespectrum.png)
+install(FILES assets/pipespectrum-128.png DESTINATION share/icons/hicolor/128x128/apps RENAME pipespectrum.png)
+install(FILES assets/pipespectrum-64.png DESTINATION share/icons/hicolor/64x64/apps RENAME pipespectrum.png)
+install(FILES assets/pipespectrum-48.png DESTINATION share/icons/hicolor/48x48/apps RENAME pipespectrum.png)

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=PipeSpectrum
+GenericName=Audio Spectrum Analyzer
+Comment=Real-time FFT spectrum analyzer for PipeWire
+Icon=pipespectrum
+Exec=pipespectrum
+Terminal=false
+Categories=AudioVideo;Audio;Visualization;
+Keywords=audio;spectrum;fft;visualizer;pipewire;
+StartupNotify=true
