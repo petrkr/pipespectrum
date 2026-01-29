@@ -66,11 +66,9 @@ bool Renderer::initialize() {
         return false;
     }
 
-    // Initialize GLEW
-    glewExperimental = GL_TRUE;
-    GLenum glewError = glewInit();
-    if (glewError != GLEW_OK) {
-        std::cerr << "GLEW initialization failed: " << glewGetErrorString(glewError) << std::endl;
+    // Initialize GLAD
+    if (!gladLoadGL((GLADloadfunc)SDL_GL_GetProcAddress)) {
+        std::cerr << "GLAD initialization failed" << std::endl;
         return false;
     }
 

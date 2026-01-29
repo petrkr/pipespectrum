@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(pipespectrum VERSION 1.0.0 LANGUAGES CXX)
+project(pipespectrum VERSION 1.0.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -17,8 +17,6 @@ pkg_check_modules(SDL3 REQUIRED sdl3)
 # OpenGL
 find_package(OpenGL REQUIRED)
 
-# GLEW
-pkg_check_modules(GLEW REQUIRED glew)
 
 # FFTW3 (float version)
 pkg_check_modules(FFTW3 REQUIRED fftw3f)
@@ -34,6 +32,7 @@ set(SOURCES
     src/Renderer.cpp
     src/SpectrumMeter.cpp
     src/Config.cpp
+    src/glad.c
 )
 
 # Headers
@@ -51,7 +50,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/include
     ${PIPEWIRE_INCLUDE_DIRS}
     ${SDL3_INCLUDE_DIRS}
-    ${GLEW_INCLUDE_DIRS}
     ${FFTW3_INCLUDE_DIRS}
     ${YAMLCPP_INCLUDE_DIRS}
 )
@@ -60,10 +58,10 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     ${PIPEWIRE_LIBRARIES}
     ${SDL3_LIBRARIES}
     OpenGL::GL
-    ${GLEW_LIBRARIES}
     ${FFTW3_LIBRARIES}
     ${YAMLCPP_LIBRARIES}
     pthread
+    ${CMAKE_DL_LIBS}
 )
 
 target_compile_options(${PROJECT_NAME} PRIVATE

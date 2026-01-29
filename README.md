@@ -14,19 +14,19 @@ Real-time FFT spectrum analyzer for PipeWire audio streams.
 
 ### Arch Linux / Manjaro
 ```bash
-sudo pacman -S pipewire sdl3 glew fftw yaml-cpp cmake gcc
+sudo pacman -S pipewire sdl3 fftw yaml-cpp cmake gcc
 ```
 
 **Note**: FFTW package on Arch includes both double and float versions.
 
 ### Ubuntu / Debian
 ```bash
-sudo apt install libpipewire-0.3-dev libsdl3-dev libglew-dev libfftw3-single3 libfftw3-dev libyaml-cpp-dev cmake g++
+sudo apt install libpipewire-0.3-dev libsdl3-dev libfftw3-single3 libfftw3-dev libyaml-cpp-dev cmake g++
 ```
 
 ### Fedora
 ```bash
-sudo dnf install pipewire-devel SDL3-devel glew-devel fftw-devel yaml-cpp-devel cmake gcc-c++
+sudo dnf install pipewire-devel SDL3-devel fftw-devel yaml-cpp-devel cmake gcc-c++
 ```
 
 ## Building

@@ -2,7 +2,7 @@
 
 #include "Config.h"
 #include <SDL3/SDL.h>
-#include <GL/glew.h>
+#include <glad/glad.h>
 #include <vector>
 
 class Renderer {
