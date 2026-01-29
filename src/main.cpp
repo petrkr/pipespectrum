@@ -23,7 +23,14 @@ int main(int argc, char* argv[]) {
     // Parse command line arguments
     std::string configFile;
     for (int i = 1; i < argc; ++i) {
-        if (std::strcmp(argv[i], "-v") == 0 || std::strcmp(argv[i], "--verbose") == 0) {
+        if (std::strcmp(argv[i], "-h") == 0 || std::strcmp(argv[i], "--help") == 0) {
+            std::cout << "Usage: pipespectrum [OPTIONS] [CONFIG_FILE]\n\n"
+                      << "Options:\n"
+                      << "  -h, --help     Show this help message\n"
+                      << "  -v, --verbose  Enable verbose output\n\n"
+                      << "Config file defaults to ~/.config/pipespectrum/config.yml\n";
+            return 0;
+        } else if (std::strcmp(argv[i], "-v") == 0 || std::strcmp(argv[i], "--verbose") == 0) {
             g_verbose = true;
         } else if (argv[i][0] != '-') {
             configFile = argv[i];
