@@ -2,6 +2,8 @@
 #include <iostream>
 #include <algorithm>
 
+extern bool g_verbose;
+
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb/stb_image.h"
 #include "icon_data.h"
@@ -139,7 +141,7 @@ void Renderer::renderSpectrum(const std::vector<float>& bands, const std::vector
         }
     }
 
-    if (++renderCount % 60 == 0) {
+    if (g_verbose && ++renderCount % 60 == 0) {
         std::cout << "[RENDER] Frame #" << renderCount << ", max band: " << maxBandSeen
                   << ", bars: " << numBands << ", width: " << barWidth << std::endl;
         maxBandSeen = 0.0f;

@@ -3,6 +3,8 @@
 #include <algorithm>
 #include <iostream>
 
+extern bool g_verbose;
+
 FFTAnalyzer::FFTAnalyzer(int fftSize, int sampleRate, int numBands, float minFreq, float maxFreq,
                          float minDb, float maxDb, float noiseThreshold, bool freqWeighting, float smoothing)
     : fftSize(fftSize), sampleRate(sampleRate), numBands(numBands),
@@ -50,7 +52,7 @@ void FFTAnalyzer::process(const float* samples, size_t count) {
 
         // When buffer is full, perform FFT
         if (bufferPos >= static_cast<size_t>(fftSize)) {
-            if (++processCount % 10 == 0) {
+            if (g_verbose && ++processCount % 10 == 0) {
                 std::cout << "[FFT] Processing FFT #" << processCount
                           << ", max sample: " << maxSample << std::endl;
                 maxSample = 0.0f;
@@ -145,7 +147,7 @@ void FFTAnalyzer::calculateBands() {
         maxBand = std::max(maxBand, bands[i]);
     }
 
-    if (++calcCount % 10 == 0) {
+    if (g_verbose && ++calcCount % 10 == 0) {
         std::cout << "[FFT] Bands calculated #" << calcCount
                   << ", max band value: " << maxBand << std::endl;
         maxBand = 0.0f;

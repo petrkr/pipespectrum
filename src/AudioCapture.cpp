@@ -2,6 +2,8 @@
 #include <iostream>
 #include <cstring>
 
+extern bool g_verbose;
+
 AudioCapture::AudioCapture(int sampleRate, int bufferSize)
     : sampleRate(sampleRate), bufferSize(bufferSize) {
 }
@@ -140,11 +142,9 @@ void AudioCapture::onProcessStream(void* userData) {
     uint32_t numSamples = spaBuffer->datas[0].chunk->size / sizeof(float);
 
     static int processCount = 0;
-    static bool firstLog = true;
-    if (firstLog || ++processCount % 100 == 0) {
+    if (g_verbose && ++processCount % 100 == 0) {
         std::cout << "[CALLBACK] Processing audio: " << numSamples << " samples, count: "
                   << processCount << std::endl;
-        firstLog = false;
     }
 
     capture->processAudio(samples, numSamples);

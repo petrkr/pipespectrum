@@ -4,8 +4,10 @@
 #include <signal.h>
 #include <filesystem>
 #include <cstdlib>
+#include <cstring>
 
 static SpectrumMeter* g_spectrumMeter = nullptr;
+bool g_verbose = false;
 
 void signalHandler(int signal) {
     std::cout << "\nReceived signal " << signal << ", shutting down..." << std::endl;
@@ -18,14 +20,20 @@ int main(int argc, char* argv[]) {
     std::cout << "=== PipeSpectrum - FFT Spectrum Analyzer ===" << std::endl;
     std::cout << "Press ESC or Q to quit" << std::endl << std::endl;
 
+    // Parse command line arguments
+    std::string configFile;
+    for (int i = 1; i < argc; ++i) {
+        if (std::strcmp(argv[i], "-v") == 0 || std::strcmp(argv[i], "--verbose") == 0) {
+            g_verbose = true;
+        } else if (argv[i][0] != '-') {
+            configFile = argv[i];
+        }
+    }
+
     // Load configuration
     Config config;
-    std::string configFile;
 
-    if (argc > 1) {
-        // Use config file from command line argument
-        configFile = argv[1];
-    } else {
+    if (configFile.empty()) {
         // Use user config in ~/.config/pipespectrum/config.yml
         const char* home = std::getenv("HOME");
         if (home) {
@@ -64,6 +72,10 @@ int main(int argc, char* argv[]) {
         } else {
             configFile = "config.yml";
         }
+    }
+
+    if (g_verbose) {
+        std::cout << "Verbose mode enabled" << std::endl;
     }
 
     if (!config.load(configFile)) {
